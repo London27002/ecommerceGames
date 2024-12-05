@@ -21,8 +21,7 @@ class ProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-      
+        $rules = [
             'title' => ['required', 'string', 'max:255'],
             'slug' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
@@ -30,11 +29,17 @@ class ProductRequest extends FormRequest
             'platform' => ['required', 'string', 'max:255'],
             'price' => ['required', 'numeric'],
             'stock' => ['required', 'integer'],
-            'image' => ['nullable', 'string'],
-            'category_id' => ['required', 'integer']
+            'category_id' => ['required', 'integer'],
         ];
-  
+    
+        // Solo aplicar la regla de imagen si se está subiendo una nueva imagen
+        if ($this->hasFile('image')) {
+            $rules['image'] = 'image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+        }
+    
+        return $rules;
     }
+    
     public function messages(): array
     {
         return[
@@ -56,7 +61,8 @@ class ProductRequest extends FormRequest
             'price.numeric' => 'El campo precio debe ser un número',
             'stock.required' => 'El campo inventario es obligatorio',
             'stock.integer' => 'El campo inventario debe ser un número entero',
-            'image.string' => 'El campo imagen debe ser un texto',
+            'image.image' => 'El campo imagen debe ser un archivo de imagen válido', 
+            'image.mimes' => 'El campo imagen debe ser de tipo: jpg, jpeg, png, gif',
             'category_id.required' => 'El campo categoría es obligatorio',
             'category_id.integer' => 'El campo categoría debe ser un número entero'
         ];

@@ -18,7 +18,7 @@ class Categorie extends Model
         'priority',
     ];
 
-    public function products(): HasMany
+    public function products() : HasMany
     {
         return $this->hasMany(Product::class,
             'category_id',
