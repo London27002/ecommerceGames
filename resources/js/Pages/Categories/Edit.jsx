@@ -5,10 +5,12 @@ import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 
+
 export default function Edit({ category }) {
     // Inicializar los datos del formulario con los valores de la categoría
     const { data, setData, put, processing, errors } = useForm({
         name: category.name || '',
+        slug: category.slug || '',
         description: category.description || '',
         priority: category.priority || '',
     });
@@ -17,7 +19,7 @@ export default function Edit({ category }) {
         e.preventDefault();
 
         // Enviar los datos al backend
-        put(route('categories.update', category.id_categorie), {
+        put(route('categories.update', category.slug), {
             preserveScroll: true, // Evitar el desplazamiento de la página después de enviar
         });
     };
@@ -44,6 +46,18 @@ export default function Edit({ category }) {
                                         required
                                     />
                                     <InputError message={errors.name} className="mt-2" />
+                                </div>
+                              {/* Slug de la categoría */}
+                                <div className="mt-4">
+                                    <InputLabel htmlFor="slug" value="Slug" />
+                                    <TextInput
+                                        id="slug"
+                                        value={data.slug}
+                                        onChange={(e) => setData('slug', e.target.value)}
+                                        className="mt-1 block w-full"
+                                        required
+                                    />
+                                    <InputError message={errors.slug} className="mt-2" />   
                                 </div>
 
                                 {/* Descripción de la categoría */}

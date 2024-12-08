@@ -22,10 +22,10 @@ class UpdateCategorieRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-            'priority' =>'required|integer|min:1|max:10',
+            'priority' => 'required|integer|min:1|max:10',
+            'slug' => 'required|string|max:255|unique:categories,slug,' . $this->route('slug') . ',slug', // Excluye el slug actual durante la actualización
         ];
     }
 }

@@ -16,7 +16,7 @@ export default function Home({ auth, categories, products }) {
 
     // Filtrar productos por la categoría seleccionada
     const filteredProducts = selectedCategory
-        ? products.filter((product) => product.category_id === selectedCategory.id_categorie)
+        ? products.filter((product) => product.category_slug === selectedCategory.slug)
         : products;
 
     return (
@@ -88,7 +88,7 @@ export default function Home({ auth, categories, products }) {
                                 </button>
                                 {categories.map((category) => (
                                     <button
-                                        key={category.id_categorie}
+                                        key={category.slug}
                                         onClick={() => handleCategorySelect(category)}
                                         className={`px-6 py-3 text-white rounded-lg transition ${selectedCategory?.id_categorie === category.id_categorie ? 'bg-[#FF2D20]' : 'bg-[#FF6F61] hover:bg-[#FF2D20]'}`}
                                     >

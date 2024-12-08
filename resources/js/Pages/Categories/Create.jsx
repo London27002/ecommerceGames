@@ -8,6 +8,7 @@ import { Head, useForm } from '@inertiajs/react';
 export default function Create() {
    const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
+        slug: '',
         description: '',
         priority: '',
     });
@@ -28,7 +29,7 @@ export default function Create() {
                 </h2>
             }
         >
-            <Head title=" Create a new project" />
+            <Head title="  Create a new Category" />
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -55,6 +56,22 @@ export default function Create() {
                     <InputError message={errors.name} className="mt-2" />
                 </div>
                         <div>
+
+                    <InputLabel htmlFor="slug" value=" Slug" />
+
+                    <TextInput
+
+                        id="slug"
+                        name="slug"
+                        value={data.slug}
+
+                        className="mt-1 block w-full"
+                        autoComplete="slug"
+                        isFocused={true}
+                        onChange={(e) => setData('slug', e.target.value)}
+                        required
+                    />
+                    
 
                     <InputLabel htmlFor="description" value=" Description" />
 

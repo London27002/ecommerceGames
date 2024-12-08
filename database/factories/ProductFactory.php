@@ -2,32 +2,36 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
+use App\Models\Categorie;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
- */
 class ProductFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     * El nombre del modelo que esta fábrica está generando.
      *
-     * @return array<string, mixed>
+     * @var string
      */
-    public function definition(): array
+    protected $model = Product::class;
+
+    /**
+     * Definir el estado predeterminado de la fábrica.
+     *
+     * @return array
+     */
+    public function definition()
     {
         return [
-            
-            'title' => $this->faker->words(5, true),
-            'slug' => $this->faker->words(5, true),
-            'description' => $this->faker->sentence(10),
-            'genre' => $this->faker->words(5, true),
-            'platform' => $this->faker->words(5, true),
-            'price' => $this->faker->randomFloat(2, 0, 999),
-            'stock' => $this->faker->numberBetween(1, 100),
-            'image' => $this->faker->imageUrl(),
-            'category_id' => $this->faker->numberBetween(1, 5),
-
+            'title' => $this->faker->word, // Genera un título aleatorio
+            'slug' => $this->faker->slug, // Genera un slug único
+            'description' => $this->faker->paragraph, // Genera una descripción aleatoria
+            'genre' => $this->faker->word, // Genera un género aleatorio
+            'platform' => $this->faker->word, // Genera una plataforma aleatoria
+            'price' => $this->faker->randomFloat(2, 10, 100), // Genera un precio aleatorio entre 10 y 100
+            'stock' => $this->faker->numberBetween(1, 100), // Genera un número aleatorio de unidades en stock
+            'image' => $this->faker->imageUrl(), // Genera una URL de imagen aleatoria
+            'category_slug' => Categorie::factory()->create()->slug, // Asocia un category_slug de una categoría creada aleatoriamente
         ];
     }
 }

@@ -9,6 +9,7 @@ Route::post('/login', [LoginController::class, 'login']);
 
 // Rutas protegidas con Sanctum
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('products', ProductController::class);
-    Route::apiResource('categories', CategorieController::class);
+Route::apiResource('products', ProductController::class);
+
+Route::apiResource('categories', CategorieController::class);
 });

@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id('id_product');
-            $table->string('title'); // Título del videojuego
-            $table->string('slug')->unique(); // URL amigable
-            $table->text('description'); // Descripción
-            $table->string('genre'); // Género del videojuego
-            $table->string('platform'); // Plataforma
-            $table->decimal('price', 10, 2); // Precio
-            $table->integer('stock'); // Inventario
-            $table->string('image')->nullable(); // URL de la imagen
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id_categorie')->on('categories')->onDelete('cascade');
-            $table->timestamps(); 
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->text('description');
+            $table->string('genre');
+            $table->string('platform');
+            $table->decimal('price', 10, 2);
+            $table->integer('stock');
+            $table->string('image')->nullable();
+            $table->string('category_slug'); 
+            $table->foreign('category_slug')->references('slug')->on('categories')->onDelete('cascade'); // Establecer relación con slug
+            $table->timestamps();
         });
     }
 

@@ -22,10 +22,10 @@ class StoreCategorieRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
             'name' => 'required|string|max:255',
+            'slug' => 'required|string|unique:categories,slug|max:255', // Validar que el slug sea único
             'description' => 'required|string|max:255',
-            'priority' =>'required|integer|min:1|max:10',
+            'priority' => 'required|integer|min:1|max:10',
         ];
     }
 }

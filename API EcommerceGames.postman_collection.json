@@ -18,7 +18,7 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": ""
+								"token": "1|2X2rI9VjRqVceDXw3GK6tPQtAhApslmmm284IES7f186b8cd"
 							}
 						},
 						"method": "GET",
@@ -38,13 +38,19 @@
 								}
 							}
 						},
-						"url": "http://localhost:8000/api/product"
+						"url": "http://localhost:8000/api/products"
 					},
 					"response": []
 				},
 				{
 					"name": "Store",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "1|2X2rI9VjRqVceDXw3GK6tPQtAhApslmmm284IES7f186b8cd"
+							}
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -58,12 +64,12 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "Videojuego Ejemplo\t",
+									"value": "Videojuego Ejemplo2",
 									"type": "text"
 								},
 								{
 									"key": "slug",
-									"value": "videojuego-ejemplo\t",
+									"value": "videojuego-ejemplo2",
 									"type": "text"
 								},
 								{
@@ -92,24 +98,33 @@
 									"type": "text"
 								},
 								{
-									"key": "category_id",
-									"value": "1",
+									"key": "category_slug",
+									"value": "vero voluptatem officiis nisi nostrum",
 									"type": "text"
 								},
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/Juans/Downloads/images.jpg"
+									"src": "/C:/Users/Juans/Documents/Universidad/Laravel/IMAGEN~1/GAMESW~1/GAMESW~1/GAME_W~2/GAMEWA~1/WALLPA~1.JPG"
 								}
 							]
 						},
-						"url": "http://localhost:8000/api/product"
+						"url": "http://localhost:8000/api/products"
 					},
 					"response": []
 				},
 				{
 					"name": "Show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "1|2X2rI9VjRqVceDXw3GK6tPQtAhApslmmm284IES7f186b8cd"
+							}
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -118,37 +133,23 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8000/api/product/11"
-					},
-					"response": []
-				},
-				{
-					"name": "Update",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
 						"body": {
-							"mode": "raw",
-							"raw": " {\r\n    \"platform\": \"pc\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"mode": "formdata",
+							"formdata": []
 						},
-						"url": "http://localhost:8000/api/product/11"
+						"url": "http://localhost:8000/api/products/suscipit-error-dolores-consequatur-nostrum-ullam-est"
 					},
 					"response": []
 				},
 				{
 					"name": "Destroy",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "1|2X2rI9VjRqVceDXw3GK6tPQtAhApslmmm284IES7f186b8cd"
+							}
+						},
 						"method": "DELETE",
 						"header": [
 							{
@@ -157,7 +158,7 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8000/api/product/16"
+						"url": "http://localhost:8000/api/products/consequatur-expedita-qui-quo-in-repellendus"
 					},
 					"response": []
 				},
@@ -181,6 +182,12 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "1|2X2rI9VjRqVceDXw3GK6tPQtAhApslmmm284IES7f186b8cd"
+							}
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -198,13 +205,19 @@
 								}
 							}
 						},
-						"url": "http://localhost:8000/api/categorie"
+						"url": "http://localhost:8000/api/categories"
 					},
 					"response": []
 				},
 				{
 					"name": "Store",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "1|2X2rI9VjRqVceDXw3GK6tPQtAhApslmmm284IES7f186b8cd"
+							}
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -215,20 +228,26 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\r\n{\r\n    \"name\": \"Categoría de Ejemplo\",\r\n    \"description\": \"Descripción de ejemplo para la categoría.\",\r\n    \"priority\": 2\r\n}\r\n",
+							"raw": "{\r\n    \"name\": \"Electronics\",\r\n    \"slug\": \"electronics\",\r\n    \"description\":\" Electronicos\",\r\n    \"priority\":1 \r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8000/api/categorie"
+						"url": "http://localhost:8000/api/categories"
 					},
 					"response": []
 				},
 				{
 					"name": "Show",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "1|2X2rI9VjRqVceDXw3GK6tPQtAhApslmmm284IES7f186b8cd"
+							}
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -237,13 +256,19 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8000/api/categorie/6"
+						"url": "http://localhost:8000/api/categories/electronics1"
 					},
 					"response": []
 				},
 				{
 					"name": "Update",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "1|2X2rI9VjRqVceDXw3GK6tPQtAhApslmmm284IES7f186b8cd"
+							}
+						},
 						"method": "PUT",
 						"header": [
 							{
@@ -254,20 +279,26 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Categoría de Ejemplo\",\r\n    \"description\": \"Descripción de ejemplo para la categoría.\",\r\n    \"priority\": 5\r\n}",
+							"raw": "{\r\n    \"name\": \"Electronics Sebas\",\r\n    \"slug\": \"electronics1\",\r\n    \"description\":\" Electronicos\",\r\n    \"priority\":2\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8000/api/categorie/6"
+						"url": "http://localhost:8000/api/categories/electronics1"
 					},
 					"response": []
 				},
 				{
 					"name": "Destroy",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "1|2X2rI9VjRqVceDXw3GK6tPQtAhApslmmm284IES7f186b8cd"
+							}
+						},
 						"method": "DELETE",
 						"header": [
 							{
@@ -276,7 +307,7 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8000/api/categorie/6"
+						"url": "http://localhost:8000/api/categories/electronics1"
 					},
 					"response": []
 				}
@@ -298,7 +329,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"cruickshank.andreane@example.org\",\r\n    \"password\": \"$2y$12$q3HaOfQyo0pu.HAf2psSr.aTww6hq8OHpDcfQKGG55VlhR8b/Q2mm\",\r\n    \"name\": \"Prof. Piper Weber\"\r\n    \r\n}",
+							"raw": "{\r\n    \"email\": \"juan.londono27002@ucaldas.edu.co\",\r\n    \"password\": \"Sebas3020\",\r\n    \"name\": \"Sebas Londoño\"\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

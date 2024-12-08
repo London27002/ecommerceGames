@@ -43,50 +43,50 @@ class CategoryVisualController extends Controller
      * Display the specified resource.
      */
   // Controller: CategoryVisualController
-public function show(string $id_category)
-{
-    $category = Categorie::findOrFail($id_category);
-    $products = $category->products; // Obtén los productos asociados a esta categoría
+  public function show(string $slug)
+  {
+      $category = Categorie::where('slug', $slug)->firstOrFail();
+      $products = $category->products; // Obtén los productos asociados a esta categoría
 
-    return Inertia::render('Categories/Show', [
-        'category' => $category,
-        'products' => $products, // Pasa los productos a la vista
-    ]);
-}
+      return Inertia::render('Categories/Show', [
+          'category' => $category,
+          'products' => $products,
+      ]);
+  }
+
 
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $slug)
     {
-            $categorie = Categorie::find($id);
-            return Inertia::render('Categories/Edit', [
-                'category' => $categorie
-            ]);
+        $categorie = Categorie::where('slug', $slug)->firstOrFail(); // Buscar por slug
+        return Inertia::render('Categories/Edit', [
+            'category' => $categorie
+        ]);
     }
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategorieRequest $request, string $id)
+    public function update(UpdateCategorieRequest $request, string $slug)
     {
-        $categorie = Categorie::findOrFail($id);
+        $categorie = Categorie::where('slug', $slug)->firstOrFail();
 
-        // Actualizar la categoría con datos validados
+        // Actualizar la categoría con los datos validados
         $categorie->update($request->validated());
 
         return redirect()->route('categories.index')->with('success', 'Category updated successfully!');
     }
 
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $slug)
     {
-        //Eliminar la categoria
-        Categorie::destroy($id);
+        // Eliminar la categoría por slug
+        Categorie::where('slug', $slug)->firstOrFail()->delete();
         return redirect()->route('categories.index');
-        
     }
 }

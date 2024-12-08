@@ -14,15 +14,14 @@ class Categorie extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'description',
         'priority',
     ];
 
     public function products() : HasMany
     {
-        return $this->hasMany(Product::class,
-            'category_id',
-            'id_categorie'
-        );
+        return $this->hasMany(Product::class, 
+        'category_slug', 'slug'); 
     }
 }

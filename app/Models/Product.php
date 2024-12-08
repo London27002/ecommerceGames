@@ -21,15 +21,13 @@ class Product extends Model
         'price',
         'stock',
         'image',
-        'category_id',
+        'category_slug',
     ];
-
     public function category() : BelongsTo
     {
         return $this->belongsTo(
             Categorie::class,
-            'category_id',
-            'id_categorie'
+            'category_slug', 
         );
     }
 }

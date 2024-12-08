@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id('id_categorie');
             $table->string('name'); // Nombre de la categoría
+            $table->string('slug')->unique(); // Slug único
             $table->text('description')->nullable(); // Descripción de la categoría
             $table->integer('priority'); // Prioridad de la categoría
             $table->timestamps();

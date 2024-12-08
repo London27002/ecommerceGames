@@ -98,7 +98,7 @@ export default function ProductShow({ product, auth }) {
 
                                     {/* Category */}
                                     <div className="mb-4">
-                                        <span className="font-semibold text-[#FF2D20]">Category:</span> {product.category.name}
+                                        <span className="font-semibold text-[#FF2D20]">Category:</span> {product.category_slug}
                                     </div>
 
                                     {/* Back to Home Button */}

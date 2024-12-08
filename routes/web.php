@@ -38,4 +38,5 @@ Route::get('/products/{slug}', [ProductVisualController::class, 'show'])->name('
 
 
 
+
 require __DIR__.'/auth.php';

@@ -23,13 +23,13 @@ class ProductRequest extends FormRequest
     {
         $rules = [
             'title' => ['required', 'string', 'max:255'],
-            'slug' => ['required', 'string', 'max:255'],
+            'slug' => 'required|string|max:255|unique:categories,slug,' . $this->route('slug') . ',slug', // Excluye el slug actual durante la actualización
             'description' => ['required', 'string'],
             'genre' => ['required', 'string', 'max:255'],
             'platform' => ['required', 'string', 'max:255'],
             'price' => ['required', 'numeric'],
             'stock' => ['required', 'integer'],
-            'category_id' => ['required', 'integer'],
+            'category_slug' =>['required', 'string', 'max:255'],
         ];
     
         // Solo aplicar la regla de imagen si se está subiendo una nueva imagen
@@ -63,8 +63,8 @@ class ProductRequest extends FormRequest
             'stock.integer' => 'El campo inventario debe ser un número entero',
             'image.image' => 'El campo imagen debe ser un archivo de imagen válido', 
             'image.mimes' => 'El campo imagen debe ser de tipo: jpg, jpeg, png, gif',
-            'category_id.required' => 'El campo categoría es obligatorio',
-            'category_id.integer' => 'El campo categoría debe ser un número entero'
+            'category_slug.required' => 'El campo categoría es obligatorio',
+        
         ];
     }
 }

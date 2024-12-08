@@ -9,10 +9,10 @@ export default function Index({ products }) {
     // Función para manejar la eliminación del producto
     const { delete: deleteProduct } = useForm();  // Usar useForm y desestructurar la función delete
 
-    const handleDelete = (id) => {
+    const handleDelete = (slug) => {
         if (confirm('Are you sure you want to delete this product?')) {
             // Redirecciona al backend para manejar la eliminación
-            deleteProduct(route('products.destroy', id));  // Usar deleteProduct directamente
+            deleteProduct(route('products.destroy', slug));  // Usar deleteProduct directamente
         }
     };
 
@@ -69,12 +69,12 @@ export default function Index({ products }) {
                                                     'No image'
                                                 )}
                                             </td>
-                                            <td className="border border-gray-300 px-4 py-2">{product.category_id}</td>
+                                            <td className="border border-gray-300 px-4 py-2">{product.category_slug}</td>
                                             <td className="border border-gray-300 px-4 py-2 flex space-x-2">
                                                                                                         <td className="border border-gray-300 px-4 py-2 flex flex-col space-y-2">
                                              {/* Botón de editar */}
                                              <Link
-                                                    href={route('products.edit', product.id_product)} // Corrección: usa el helper route() y pasa el ID correctamente
+                                                    href={route('products.edit', product.slug)} // Corrección: usa el helper route() y pasa el ID correctamente
                                                     className="px-2 py-1 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 text-center"
                                                         >
                                                          Edit
@@ -82,7 +82,7 @@ export default function Index({ products }) {
                                                     
                                                      {/* Botón de eliminar */}
                                                 <button
-                                                    onClick={() => handleDelete(product.id_product)}  // Se pasa correctamente el ID
+                                                    onClick={() => handleDelete(product.slug)}  // Se pasa correctamente el ID
                                                     className="px-2 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 text-center"
                                                 >
                                                     Delete

@@ -2,10 +2,11 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
+import Select from '@/Components/Select';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 
-export default function Edit({ product }) {
+export default function Edit({ product, categories }) {
     const { data, setData, post, processing, errors } = useForm({
         title: product.title || '',
         slug: product.slug || '',
@@ -14,23 +15,22 @@ export default function Edit({ product }) {
         platform: product.platform || '',
         price: product.price || '',
         stock: product.stock || '',
-        image: null, // Para subir una nueva imagen
-        category_id: product.category_id || '',
-        _method: 'PUT', // Para simular un PUT request
+        image: null,
+        category_slug: product.category_slug || '',
+        _method: 'PUT',
     });
 
     const submit = (e) => {
         e.preventDefault();
 
-        // Crear un FormData object
         const formData = new FormData();
         for (let key in data) {
             if (key === 'image' && data[key] === null) continue;
             formData.append(key, data[key]);
         }
 
-        // Enviar datos al backend mediante POST (simulando PUT)
-        post(route('products.update', product.id_product), formData);
+        // Usar el slug del producto para la ruta de actualización
+        post(route('products.update', product.slug), formData);
     };
 
     return (
@@ -43,10 +43,9 @@ export default function Edit({ product }) {
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                        <form onSubmit={submit} encType="multipart/form-data">
-                        <div>
+                            <form onSubmit={submit} encType="multipart/form-data">
+                                <div>
                                     <InputLabel htmlFor="title" value="Product Title" />
-
                                     <TextInput
                                         id="title"
                                         name="title"
@@ -57,13 +56,11 @@ export default function Edit({ product }) {
                                         onChange={(e) => setData('title', e.target.value)}
                                         required
                                     />
-
                                     <InputError message={errors.title} className="mt-2" />
                                 </div>
 
                                 <div>
                                     <InputLabel htmlFor="slug" value="Slug (URL)" />
-
                                     <TextInput
                                         id="slug"
                                         name="slug"
@@ -73,13 +70,11 @@ export default function Edit({ product }) {
                                         onChange={(e) => setData('slug', e.target.value)}
                                         required
                                     />
-
                                     <InputError message={errors.slug} className="mt-2" />
                                 </div>
 
                                 <div>
                                     <InputLabel htmlFor="description" value="Product Description" />
-
                                     <TextInput
                                         id="description"
                                         name="description"
@@ -88,13 +83,11 @@ export default function Edit({ product }) {
                                         autoComplete="description"
                                         onChange={(e) => setData('description', e.target.value)}
                                     />
-
                                     <InputError message={errors.description} className="mt-2" />
                                 </div>
 
                                 <div>
                                     <InputLabel htmlFor="genre" value="Genre" />
-
                                     <TextInput
                                         id="genre"
                                         name="genre"
@@ -103,13 +96,11 @@ export default function Edit({ product }) {
                                         autoComplete="genre"
                                         onChange={(e) => setData('genre', e.target.value)}
                                     />
-
                                     <InputError message={errors.genre} className="mt-2" />
                                 </div>
 
                                 <div>
                                     <InputLabel htmlFor="platform" value="Platform" />
-
                                     <TextInput
                                         id="platform"
                                         name="platform"
@@ -118,13 +109,11 @@ export default function Edit({ product }) {
                                         autoComplete="platform"
                                         onChange={(e) => setData('platform', e.target.value)}
                                     />
-
                                     <InputError message={errors.platform} className="mt-2" />
                                 </div>
 
                                 <div>
                                     <InputLabel htmlFor="price" value="Price" />
-
                                     <TextInput
                                         id="price"
                                         name="price"
@@ -134,13 +123,11 @@ export default function Edit({ product }) {
                                         onChange={(e) => setData('price', e.target.value)}
                                         required
                                     />
-
                                     <InputError message={errors.price} className="mt-2" />
                                 </div>
 
                                 <div>
                                     <InputLabel htmlFor="stock" value="Stock" />
-
                                     <TextInput
                                         id="stock"
                                         name="stock"
@@ -150,13 +137,11 @@ export default function Edit({ product }) {
                                         onChange={(e) => setData('stock', e.target.value)}
                                         required
                                     />
-
                                     <InputError message={errors.stock} className="mt-2" />
                                 </div>
 
                                 <div>
                                     <InputLabel htmlFor="image" value="Product Image" />
-
                                     <input
                                         type="file"
                                         id="image"
@@ -164,29 +149,32 @@ export default function Edit({ product }) {
                                         className="mt-1 block w-full"
                                         onChange={(e) => setData('image', e.target.files[0])}
                                     />
-
                                     <InputError message={errors.image} className="mt-2" />
                                 </div>
 
                                 <div>
-                                    <InputLabel htmlFor="category_id" value="Category" />
-
-                                    <TextInput
-                                        id="category_id"
-                                        name="category_id"
-                                        value={data.category_id}
+                                    <InputLabel htmlFor="category_slug" value="Category" />
+                                    <Select
+                                        id="category_slug"
+                                        name="category_slug"
+                                        value={data.category_slug}
                                         className="mt-1 block w-full"
-                                        autoComplete="category_id"
-                                        onChange={(e) => setData('category_id', e.target.value)}
+                                        onChange={(e) => setData('category_slug', e.target.value)}
                                         required
-                                    />
-
-                                    <InputError message={errors.category_id} className="mt-2" />
+                                    >
+                                        <option value="">Select a category</option>
+                                        {categories.map((category) => (
+                                            <option key={category.slug} value={category.slug}>
+                                                {category.name}
+                                            </option>
+                                        ))}
+                                    </Select>
+                                    <InputError message={errors.category_slug} className="mt-2" />
                                 </div>
 
                                 <div className="mt-4 flex items-center justify-end">
                                     <PrimaryButton className="ms-4" disabled={processing}>
-                                      Update Product
+                                        Update Product
                                     </PrimaryButton>
                                 </div>
                             </form>
@@ -197,3 +185,4 @@ export default function Edit({ product }) {
         </AuthenticatedLayout>
     );
 }
+
